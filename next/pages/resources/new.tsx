@@ -2,6 +2,7 @@ import Layout from 'components/Layout';
 import { ChangeEvent, useState } from 'react';
 import { Resourse } from '../api/resources';
 import axios from 'axios';
+import { useRouter } from 'next/router';
 
 const defaultValue: Resourse = {
   title: '',
@@ -15,11 +16,15 @@ type Form = HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
 
 const ResourceCreate = () => {
   const [form, setForm] = useState(defaultValue);
+  const router = useRouter();
 
   const submitForm = () => {
     axios
       .post('/api/resources', form)
-      .then((res) => alert(res.data))
+      .then((res) => {
+        alert(res.data);
+        router.push('/');
+      })
       .catch((err) => alert(err.response.data));
   };
 

@@ -29,7 +29,7 @@ app.post('/api/resources', (req, res) => {
   const resources = getResources();
   const r = req.body;
 
-  r.createdAt = Date.now();
+  r.createdAt = new Date(Date.now());
   r.status = 'غیرفعال';
   r.id = Date.now().toString();
   resources.push(r);
