@@ -1,12 +1,11 @@
 import Layout from 'components/Layout';
 import { GetServerSidePropsContext, NextPageContext } from 'next';
-import { Resourse } from '../api/resources';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { Resourse } from '@/pages/api/resources';
 
 const ResourceDetail = ({ resource }: { resource: Resourse }) => {
   const router = useRouter();
-
-  // if (router.isFallback) return <div>Loading...</div>;
 
   return (
     <Layout>
@@ -20,6 +19,9 @@ const ResourceDetail = ({ resource }: { resource: Resourse }) => {
                     <h2 className="subtitle is-4">{resource.createdAt}</h2>
                     <h1 className="title">{resource.title}</h1>
                     <p>{resource.description}</p>
+                    <Link href={`/resources/${resource.id}/edit`} legacyBehavior>
+                      <a className="button is-warning">ویرایش</a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -31,36 +33,14 @@ const ResourceDetail = ({ resource }: { resource: Resourse }) => {
   );
 };
 
-// ResourceDetail.getInitialProps = async ({ query }: NextPageContext) => {
-//   const dataRes = await fetch('http://localhost:3001/api/resources/' + query?.id);
-//   const data = await dataRes.json();
-//   console.log('hi');
-
-//   return { resource: data };
-// };
-
-export async function getStaticPaths() {
-  const resData = await fetch('http://localhost:3001/api/resources');
-  const data: Resourse[] = await resData.json();
-
-  const paths = data.map((r) => {
-    return {
-      params: { id: r.id }
-    };
-  });
-
-  return { paths, fallback: false };
-}
-
-export async function getStaticProps({ params }: GetServerSidePropsContext) {
+export async function getServerSideProps({ params }: GetServerSidePropsContext) {
   const dataRes = await fetch('http://localhost:3001/api/resources/' + params?.id);
   const data: Resourse[] = await dataRes.json();
 
   return {
     props: {
       resource: data
-    },
-    revalidate: 10
+    }
   };
 }
 

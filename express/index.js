@@ -27,6 +27,19 @@ app.get('/api/resources/:id', (req, res) => {
   res.send(resource);
 });
 
+app.patch('/api/resources/:id', (req, res) => {
+  const resources = getResources();
+  const { id } = req.params;
+
+  const index = resources.findIndex((r) => r.id === id);
+  resources[index] = req.body;
+
+  fs.writeFile(pathToFile, JSON.stringify(resources, null, 2), (err) => {
+    if (err) res.status(422).send('منبع موردنظر اپدیت نشد');
+    return res.send('منبع موردنظر اپدیت شد');
+  });
+});
+
 app.get('/api/resources', (req, res) => {
   const resources = getResources();
   res.send(resources);
@@ -42,8 +55,8 @@ app.post('/api/resources', (req, res) => {
   resources.push(r);
 
   fs.writeFile(pathToFile, JSON.stringify(resources, null, 2), (err) => {
-    if (err) res.status(422).send('نمیتوان دیتا را در دیتابیس ذخیره کرد');
-    return res.send('داده ها دریافت شده است');
+    if (err) res.status(422).send('منبع موردنظر ایجاد نشد');
+    return res.send('منبع موردنظر ایجاد شد');
   });
 });
 

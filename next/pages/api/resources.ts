@@ -1,4 +1,4 @@
-import axios, { AxiosError } from 'axios';
+import axios, { AxiosError, AxiosResponse, AxiosStatic } from 'axios';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export interface Resourse {
@@ -20,13 +20,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.send(data);
   }
 
-  if (req.method === 'POST') {
-    const { title, description, link, timeToFinish, priority } = req.body;
+  if (req.method === 'POST' || req.method === 'PATCH') {
+    const { id, title, description, link, timeToFinish, priority } = req.body;
     if (!title || !description || !link || !timeToFinish || !priority)
       res.status(422).send('دیتا کامل نیست');
 
+    const url =
+      req.method === 'POST'
+        ? 'http://localhost:3001/api/resources'
+        : `http://localhost:3001/api/resources/${id}`;
+
+    type method = 'post' | 'patch';
+
     try {
-      const axiosRes = await axios.post('http://localhost:3001/api/resources', req.body);
+      const axiosRes = await axios[req.method.toLowerCase() as method](url, req.body);
       return res.send(axiosRes.data);
     } catch (err) {
       return res.status(422).send((err as AxiosError).response?.data);
