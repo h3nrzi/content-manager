@@ -1,4 +1,5 @@
 import { Resourse } from '@/pages/api/resources';
+import Link from 'next/link';
 
 interface Props {
   resources: Resourse[];
@@ -6,12 +7,15 @@ interface Props {
 
 const ResourceList = ({ resources }: Props) => {
   const renderResources = () =>
-    resources.map((resource) => (
-      <div className="column is-5 is-offset-1 " key={resource.id}>
+    resources.map((r) => (
+      <div className="column is-5 is-offset-1 " key={r.id}>
         <div className="content is-medium">
-          <h2 className="subtitle is-5 has-text-grey">{resource.createdAt}</h2>
-          <h1 className="title has-text-black is-3">{resource.title}</h1>
-          <p className="has-text-dark">{resource.description}</p>
+          <h2 className="subtitle is-5 has-text-grey">{r.createdAt}</h2>
+          <h1 className="title has-text-black is-3">{r.title}</h1>
+          <p className="has-text-dark">{r.description}</p>
+          <Link href={`/resources/${r.id}`} legacyBehavior>
+            <a className="button is-link">جزئیات</a>
+          </Link>
         </div>
       </div>
     ));

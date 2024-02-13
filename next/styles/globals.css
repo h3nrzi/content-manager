@@ -21,3 +21,10 @@ input,
 textarea {
   font-family: inherit;
 }
+
+@media (prefers-color-scheme: light) {
+  body {
+    color: #000;
+    background: #fff;
+  }
+}
