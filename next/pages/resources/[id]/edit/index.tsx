@@ -1,6 +1,5 @@
 import ResourceForm from 'components/ResourceForm';
 import { Resourse } from '@/pages/api/resources';
-import Layout from 'components/Layout';
 import { GetServerSidePropsContext } from 'next/types';
 import axios from 'axios';
 import router from 'next/router';
@@ -17,13 +16,11 @@ const EditResource = ({ resource }: { resource: Resourse }) => {
   };
 
   return (
-    <Layout>
-      <ResourceForm
-        title="ویرایش کردن منبع"
-        initialData={resource}
-        onSubmitForm={(data: Resourse) => updateResource(data)}
-      />
-    </Layout>
+    <ResourceForm
+      title="ویرایش کردن منبع"
+      initialData={resource}
+      onSubmitForm={(data: Resourse) => updateResource(data)}
+    />
   );
 };
 

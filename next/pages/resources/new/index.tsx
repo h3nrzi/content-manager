@@ -1,4 +1,3 @@
-import Layout from 'components/Layout';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import ResourceForm from 'components/ResourceForm';
@@ -18,12 +17,10 @@ const ResourceCreate = () => {
   };
 
   return (
-    <Layout>
-      <ResourceForm
-        title="افزودن منبع جدید"
-        onSubmitForm={(data: Resourse) => createResource(data)}
-      />
-    </Layout>
+    <ResourceForm
+      title="افزودن منبع جدید"
+      onSubmitForm={(data: Resourse) => createResource(data)}
+    />
   );
 };
 
