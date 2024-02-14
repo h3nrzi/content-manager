@@ -16,8 +16,11 @@ app.use(express.json());
 
 //////////// ROUTE HANDLER
 
-app.get('/', (req, res) => {
-  res.send('Hello World');
+app.get('/api/activeresource', (req, res) => {
+  const resources = getResources();
+  const activeResource = resources.find((r) => r.status === 'فعال');
+
+  res.send(activeResource);
 });
 
 app.get('/api/resources/:id', (req, res) => {
@@ -30,9 +33,18 @@ app.get('/api/resources/:id', (req, res) => {
 app.patch('/api/resources/:id', (req, res) => {
   const resources = getResources();
   const { id } = req.params;
+  const isActiveResource = resources.find((r) => r.status === 'فعال');
 
   const index = resources.findIndex((r) => r.id === id);
   resources[index] = req.body;
+
+  // active resource functionality
+  if (req.body.status === 'فعال') {
+    if (isActiveResource) return res.status(422).send('منبع قبلا فعال شده است');
+
+    resources[index].status = 'فعال';
+    resources[index].activationTime = Date.now();
+  }
 
   fs.writeFile(pathToFile, JSON.stringify(resources, null, 2), (err) => {
     if (err) res.status(422).send('منبع موردنظر اپدیت نشد');

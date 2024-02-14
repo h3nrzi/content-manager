@@ -28,3 +28,19 @@ textarea {
     background: #fff;
   }
 }
+
+.active-resource {
+  background-color: #3140aa;
+  padding: 50px;
+  text-align: center;
+  color: #fff;
+}
+
+.active-resource__name {
+  font-size: 30px;
+}
+
+.time-wrapper__elapsed-time {
+  font-size: 64px;
+  font-weight: bold;
+}

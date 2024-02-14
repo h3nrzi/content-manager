@@ -11,6 +11,7 @@ export interface Resourse {
   timeToFinish: number;
   status?: string;
   createdAt?: string;
+  activationTime?: string;
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
