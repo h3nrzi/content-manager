@@ -15,9 +15,10 @@
     "description": "توضیحات منبع ۲",
     "link": "https://link.com",
     "priority": 2,
-    "timeToFinish": 60,
-    "status": "غیرفعال",
-    "createdAt": "2024-02-12T19:05:35.471Z"
+    "timeToFinish": 59,
+    "status": "اتمام",
+    "createdAt": "2024-02-12T19:05:35.471Z",
+    "activationTime": 1707991616952
   },
   {
     "id": "3",
@@ -84,9 +85,10 @@
     "description": "حسین",
     "link": "حسین",
     "priority": 1,
-    "timeToFinish": 60,
+    "timeToFinish": 59,
     "createdAt": "2024-02-12T19:05:35.471Z",
-    "status": "غیرفعال",
-    "id": "1707815083941"
+    "status": "اتمام",
+    "id": "1707815083941",
+    "activationTime": 1707990870999
   }
 ]

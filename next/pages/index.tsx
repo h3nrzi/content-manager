@@ -16,7 +16,7 @@ function Home({ resources }: { resources: Resourse[] }) {
 }
 
 export const getServerSideProps = async () => {
-  const resData = await fetch('http://localhost:3001/api/resources');
+  const resData = await fetch(`${process.env.API_URL}/api/resources`);
   const data: Resourse[] = await resData.json();
 
   return { props: { resources: data } };

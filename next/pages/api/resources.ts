@@ -16,7 +16,7 @@ export interface Resourse {
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
-    const dataRes = await fetch('http://localhost:3001/api/resources');
+    const dataRes = await fetch(`${process.env.API_URL}/api/resources`);
     const data = await dataRes.json();
     return res.send(data);
   }
@@ -28,8 +28,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const url =
       req.method === 'POST'
-        ? 'http://localhost:3001/api/resources'
-        : `http://localhost:3001/api/resources/${id}`;
+        ? `${process.env.API_URL}/api/resources`
+        : `${process.env.API_URL}/api/resources/${id}`;
 
     type method = 'post' | 'patch';
 

@@ -3,9 +3,10 @@ import Link from 'next/link';
 import axios from 'axios';
 import { Resourse } from '@/pages/api/resources';
 import moment from 'moment';
+import router from 'next/router';
 
 const ActiveResource = () => {
-  const [resource, setResource] = useState({} as Resourse);
+  const [resource, setResource] = useState<null | Resourse>();
   const [seconds, setSeconds] = useState<null | number>(null);
 
   useEffect(() => {
@@ -37,17 +38,39 @@ const ActiveResource = () => {
     }
   }, [seconds]);
 
-  return (
-    <div className="active-resource">
-      <h1 className="active-resource__name">{resource.title}</h1>
-      <div className="time-wrapper">
-        <h2 className="time-wrapper__elapsed-time">{seconds}</h2>
-      </div>
+  const completeResource = async () => {
+    axios
+      .patch('/api/resources', { ...resource, status: 'اتمام' })
+      .then(() => router.reload())
+      .catch((err) => alert('نمیتوان منبع را پایان داد'));
+  };
 
-      <Link href="" legacyBehavior>
-        <a className="button has-text-link">رفتن به منبع</a>
-      </Link>
-    </div>
+  return (
+    resource && (
+      <div className="active-resource">
+        <h1 className="active-resource__name">{resource.title}</h1>
+        <div className="time-wrapper">
+          <h2 className="time-wrapper__elapsed-time">
+            {seconds ? (
+              seconds
+            ) : (
+              <button
+                className="button is-info"
+                onClick={() => {
+                  completeResource();
+                  setResource(null);
+                }}>
+                اتمام !
+              </button>
+            )}
+          </h2>
+        </div>
+
+        <Link href={`/resources/${resource.id}`} legacyBehavior>
+          <a className="button has-text-link">رفتن به منبع</a>
+        </Link>
+      </div>
+    )
   );
 };
 

@@ -12,7 +12,7 @@ const EditResource = ({ resource }: { resource: Resourse }) => {
         alert(res.data);
         router.push(`/resources/${formData.id}`);
       })
-      .catch((err) => alert(err.response.data));
+      .catch((err) => alert('منبع مورد نظر قابل ویرایش نیست'));
   };
 
   return (
@@ -25,7 +25,7 @@ const EditResource = ({ resource }: { resource: Resourse }) => {
 };
 
 export async function getServerSideProps({ params }: GetServerSidePropsContext) {
-  const dataRes = await fetch('http://localhost:3001/api/resources/' + params?.id);
+  const dataRes = await fetch(`${process.env.API_URL}/api/resources/` + params?.id);
   const data: Resourse[] = await dataRes.json();
 
   return {

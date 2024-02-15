@@ -34,13 +34,16 @@ app.patch('/api/resources/:id', (req, res) => {
   const resources = getResources();
   const { id } = req.params;
   const isActiveResource = resources.find((r) => r.status === 'فعال');
-
   const index = resources.findIndex((r) => r.id === id);
+
+  if (resources[index].status === 'اتمام')
+    return res.status(422).send('منبع را نمیتوان فعال کرد زیرا قبلا فعال شده است');
+
   resources[index] = req.body;
 
   // active resource functionality
   if (req.body.status === 'فعال') {
-    if (isActiveResource) return res.status(422).send('منبع قبلا فعال شده است');
+    if (isActiveResource) return res.status(422).send('منبعی قبلا فعال شده است');
 
     resources[index].status = 'فعال';
     resources[index].activationTime = Date.now();
