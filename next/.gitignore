@@ -189,3 +189,4 @@ next-env.d.ts
 .sentryclirc
 
 .env.development
+.env.production
