@@ -6,7 +6,7 @@
     "link": "https://link.com",
     "priority": 3,
     "timeToFinish": 120,
-    "status": "غیر فعال",
+    "status": "غیرفعال",
     "createdAt": "۲۵ مهر ۱۴۰۲"
   },
   {
@@ -16,7 +16,7 @@
     "link": "https://link.com",
     "priority": 2,
     "timeToFinish": 60,
-    "status": "غیر فعال",
+    "status": "غیرفعال",
     "createdAt": "۲۵ مهر ۱۴۰۲"
   },
   {
@@ -26,7 +26,7 @@
     "link": "https://link.com",
     "priority": 1,
     "timeToFinish": 30,
-    "status": "غیر فعال",
+    "status": "غیرفعال",
     "createdAt": "۲۵ مهر ۱۴۰۲"
   },
   {
